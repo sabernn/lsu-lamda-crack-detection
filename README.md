@@ -18,7 +18,7 @@
 
 This repository contains code relevant to crack detection as part of the Louisiana Materials Design Alliance (LAMDA) project. The LAMDA project is led by [Dr. Shengmin Guo](https://www.lsu.edu/eng/mie/people/faculty/guo.php) ([LSU MIE](https://www.lsu.edu/eng/mie/)) and is funded by the National Science Foundation. The project is researching the development of new materials in additive manufacturing.
 
-#### Related Links
+### Related Links
 
 * [Press Release](https://www.lsu.edu/mediacenter/news/2020/05/21engineering_khonsari_lamda.php)
 * [NSF Award Page](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1946231)
