@@ -3,7 +3,7 @@
 <p align="center">
   <img src="doc/img/logo.png" alt="LSU" width="540" height="340">
 
-  <h3 align="center">AI-Assisted Crack Detection for LAMDA Project</h3>
+  <h1 align="center">AI-Assisted Crack Detection for LAMDA Project</h1>
   <p align="center">
     <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
     ·
