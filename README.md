@@ -5,11 +5,11 @@
 
   <h1 align="center">AI-Assisted Crack Detection for LAMDA Project</h1>
   <p align="center">
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/btsai-dev/lsu-lamda-crack-detection">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/btsai-dev/lsu-lamda-crack-detection/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/btsai-dev/lsu-lamda-crack-detection/issues">Request Feature</a>
   </p>
 </p>
 
