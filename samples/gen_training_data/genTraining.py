@@ -6,9 +6,14 @@
     Expected Filesystem Structure:
     dataset <- Location as the optional --dataset argument
      ├── Annotations
-     │ ├── 0.jpg
+     │ ├── 0
+     │ │   ├── category1.jpg
+     │ │   └── category2.jpg
      │ ├── ...
-     │ └── 9.jpg
+     │ └── 9
+     │     ├── category1.jpg
+     │     ├── category2.jpg
+     │     └── category3.jpg
      └── Images
        ├── 0.jpg
        ├── ...
