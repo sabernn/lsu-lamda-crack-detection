@@ -1,7 +1,7 @@
 <!-- PROJECT OVERVIEW -->
 <br />
 <p align="center">
-  <img src="doc/img/logo.png" alt="LSU" width="540" height="340">
+  <img src="doc/img/logo.jpg" alt="LSU" width="291" height="363">
 
   <h1 align="center">AI-Assisted Crack Detection for LAMDA Project</h1>
   <p align="center">
