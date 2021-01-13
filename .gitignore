@@ -1,3 +1,7 @@
+# IDE-based
+resources/img/*
+!resources/img/.gitkeep 
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
