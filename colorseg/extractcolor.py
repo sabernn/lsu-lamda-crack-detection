@@ -1,11 +1,9 @@
-import glob
 import cv2
 import numpy as np
 from PIL import Image
 from skimage import measure
-import os
-from pathlib import Path
 from shapely.geometry import Polygon, MultiPolygon
+
 
 def get_nongrey_mask(img):
     # Converts to HSV color format and attempts to detect greys from HSV

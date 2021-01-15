@@ -28,6 +28,7 @@ import cv2
 import sys
 import json
 ROOT_DIR = os.path.abspath("../../")
+RESOURCE_DIR = os.path.join(ROOT_DIR, 'resources')
 print("Root directory is ", ROOT_DIR)
 
 sys.path.append(ROOT_DIR)
