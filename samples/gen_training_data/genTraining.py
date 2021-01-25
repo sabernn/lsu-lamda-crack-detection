@@ -25,14 +25,19 @@
 
 import os
 import cv2
+import numpy as np
 import sys
 import json
 ROOT_DIR = os.path.abspath("../../")
-RESOURCE_DIR = os.path.join(ROOT_DIR, 'resources')
+RESOURCE_DIR = os.path.join(ROOT_DIR, 'resources', 'img')
+SAMPLE_DIR = os.path.join(RESOURCE_DIR, 'test')
 print("Root directory is ", ROOT_DIR)
 
 sys.path.append(ROOT_DIR)
 from colorseg import extractcolor
+import gen_annotation.flags as flags
+import gen_annotation.segcolor as segcolor
+import output_disp as od
 
 
 def get_color(img):
@@ -52,9 +57,35 @@ def make_image_annotation(img, file_name, image_id, bbox):
     return image_annotation
 
 
+def get_colors_Test(img):
+    mask = segcolor.get_colors(img)
+    #od.display(mask, 'get_colors_Test')
+    #cv2.waitKey(0)
+    #cv2.destroyAllWindows()
+    return mask
+
+
+def get_mask_categorized_Test(mask):
+    mask_categorized = segcolor.get_mask_categorized(mask)
+    print(mask_categorized)
+    counter = 0
+    for rgb_key in mask_categorized:
+        sub_image = mask_categorized.get(rgb_key)
+        print(type(sub_image))
+        sub_image.save(str(counter) + '.png')
+        counter += 1
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 
 if __name__ == '__main__':
+    original_img = cv2.imread(os.path.join(SAMPLE_DIR, 'orig.tif'))
+    marked_img = cv2.imread(os.path.join(SAMPLE_DIR, 'marked.tif'))
+    marked2_img = cv2.imread(os.path.join(SAMPLE_DIR, 'marked2.tif'))
+    mask = get_colors_Test(marked2_img)
+    get_mask_categorized_Test(mask)
+
+"""
     import argparse
 
     parser = argparse.ArgumentParser(
@@ -117,3 +148,4 @@ if __name__ == '__main__':
     }
 
     print(json.dumps(coco))
+"""
