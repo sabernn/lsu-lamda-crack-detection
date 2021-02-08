@@ -26,7 +26,7 @@ def get_mask_categorized(mask_raw):
     """
     Returns list of categorized submasks
     :param mask_raw: Image with regions of color (W,H,3)
-    :return: Dictionary of PIL submasks, keyed by RGB color
+    :return: Dictionary of binary submasks, keyed by RGB color
     """
     rgb_mask = cv2.cvtColor(mask_raw, cv2.COLOR_BGR2RGB)
     pil_mask = Image.fromarray(rgb_mask.astype('uint8'), 'RGB')
@@ -45,7 +45,7 @@ def get_mask_categorized(mask_raw):
     # Code borrowed from:
     # https://www.immersivelimit.com/create-coco-annotations-from-scratch
 
-    mask_categorized = {}
+    pil_mask_categorized = {}
     width, height = pil_mask.size
     print("Looping through image now!")
 
@@ -58,16 +58,23 @@ def get_mask_categorized(mask_raw):
             if pixel != (0, 0, 0):
                 # Check to see if we've created a sub-mask...
                 pixel_str = str(pixel)
-                sub_mask = mask_categorized.get(pixel_str)
+                sub_mask = pil_mask_categorized.get(pixel_str)
                 if sub_mask is None:
                     # Create a sub-mask (one bit per pixel) and add to the dictionary
                     # Note: we add 1 pixel of padding in each direction
                     # because the contours module doesn't handle cases
                     # where pixels bleed to the edge of the image
-                    mask_categorized[pixel_str] = Image.new('1', (width + 2, height + 2))
+                    pil_mask_categorized[pixel_str] = Image.new('1', (width + 2, height + 2))
 
                 # Set the pixel value to 1 (default is 0), accounting for padding
-                mask_categorized[pixel_str].putpixel((x + 1, y + 1), 1)
+                pil_mask_categorized[pixel_str].putpixel((x + 1, y + 1), 1)
+
+    # Loop through, OPTIMIZE THIS IN THE FUTURE
+    mask_categorized = {}
+    for rgb_key in pil_mask_categorized:
+        sub_image = pil_mask_categorized.get(rgb_key)
+        mask_categorized[rgb_key] = np.asarray(sub_image)
+        # sub_image.show()
 
     return mask_categorized
 

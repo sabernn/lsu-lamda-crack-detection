@@ -30,7 +30,7 @@ import sys
 import json
 ROOT_DIR = os.path.abspath("../../")
 RESOURCE_DIR = os.path.join(ROOT_DIR, 'resources', 'img')
-SAMPLE_DIR = os.path.join(RESOURCE_DIR, 'test')
+TEST_DIR = os.path.join(RESOURCE_DIR, 'test')
 print("Root directory is ", ROOT_DIR)
 
 sys.path.append(ROOT_DIR)
@@ -67,23 +67,62 @@ def get_colors_Test(img):
 
 def get_mask_categorized_Test(mask):
     mask_categorized = segcolor.get_mask_categorized(mask)
-    print(mask_categorized)
-    counter = 0
-    for rgb_key in mask_categorized:
-        sub_image = mask_categorized.get(rgb_key)
-        print(type(sub_image))
-        sub_image.save(str(counter) + '.png')
-        counter += 1
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+
+    return mask_categorized
 
 
 if __name__ == '__main__':
-    original_img = cv2.imread(os.path.join(SAMPLE_DIR, 'orig.tif'))
-    marked_img = cv2.imread(os.path.join(SAMPLE_DIR, 'marked.tif'))
-    marked2_img = cv2.imread(os.path.join(SAMPLE_DIR, 'marked2.tif'))
-    mask = get_colors_Test(marked2_img)
-    get_mask_categorized_Test(mask)
+    original_img = cv2.imread(os.path.join(TEST_DIR, 'orig.tif'))
+    marked_img = cv2.imread(os.path.join(TEST_DIR, 'marked.tif'))
+    mask = get_colors_Test(marked_img)
+    submasks = get_mask_categorized_Test(mask)
+
+    is_crowd = 0
+    annotation_id = 1
+    image_id = 1
+    annotations = []
+    images = []
+    categories = [
+        {"supercategory": "material defect",
+         "id": 1,
+         "name": "crack"}
+    ]
+
+    # TODO: IMPLEMENT MAKE IMAGE ANNOTATION
+    # image = make_image_anngotation(img, filename, image_id)
+    image = {
+        "file_name": "marked.tif",
+        "height": 2560,
+        "width": 2560,
+        "id": image_id
+    }
+    images.append(image)
+
+    for color, submask in submasks.items():
+        # category_id = category_ids[image_id][color]
+        category_id = 1  # Default for now
+        annotation = extractcolor.make_submask_annotations(
+            submask,
+            image_id,
+            category_id,
+            annotation_id,
+            is_crowd
+        )
+        annotations.append(annotation)
+        annotation_id += 1
+    image_id += 1
+
+    coco = {
+        "images": images,
+        "annotations": annotations,
+        "categories": categories
+    }
+    print(json.dumps(coco, indent=4))
+
+    json_out = os.path.join(TEST_DIR, "output" + "." + "json")
+
+    with open(json_out, 'w') as outfile:
+        json.dump(coco, outfile)
 
 """
     import argparse
