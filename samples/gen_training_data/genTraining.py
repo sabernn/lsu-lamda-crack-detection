@@ -28,7 +28,7 @@ import cv2
 import numpy as np
 import sys
 import json
-ROOT_DIR = os.path.abspath("../../")
+ROOT_DIR = os.path.abspath("..\\..\\")
 RESOURCE_DIR = os.path.join(ROOT_DIR, 'resources', 'img')
 TEST_DIR = os.path.join(RESOURCE_DIR, 'test')
 print("Root directory is ", ROOT_DIR)

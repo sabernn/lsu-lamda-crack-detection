@@ -1,5 +1,6 @@
 # IDE-based
 resources/img/*
+!resources/img/test
 !resources/img/.gitkeep 
 
 # Byte-compiled / optimized / DLL files
