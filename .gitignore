@@ -134,3 +134,4 @@ dmypy.json
 .pyre/
 
 .idea/
+/resources/img/test/output.json
