@@ -79,7 +79,6 @@ def get_mask_categorized(mask_raw):
     return mask_categorized
 
 
-
 def make_submask_annotations(sub_mask, image_id, category_id, annotation_id, is_crowd):
     # Find contours (boundary lines) around each sub-mask
     # Note: there could be multiple contours if the object

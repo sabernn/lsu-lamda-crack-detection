@@ -34,17 +34,8 @@ TEST_DIR = os.path.join(RESOURCE_DIR, 'test')
 print("Root directory is ", ROOT_DIR)
 
 sys.path.append(ROOT_DIR)
-from colorseg import extractcolor
-import gen_annotation.flags as flags
+
 import gen_annotation.segcolor as segcolor
-import output_disp as od
-
-
-def get_color(img):
-    mask = extractcolor.get_nongrey_mask(img)
-    target = cv2.bitwise_and(img, img, mask=mask)
-    return target
-
 
 def make_image_annotation(img, file_name, image_id, bbox):
     width, height = img.size
@@ -101,7 +92,7 @@ if __name__ == '__main__':
     for color, submask in submasks.items():
         # category_id = category_ids[image_id][color]
         category_id = 1  # Default for now
-        annotation = extractcolor.make_submask_annotations(
+        annotation = segcolor.make_submask_annotations(
             submask,
             image_id,
             category_id,
@@ -123,68 +114,3 @@ if __name__ == '__main__':
 
     with open(json_out, 'w') as outfile:
         json.dump(coco, outfile)
-
-"""
-    import argparse
-
-    parser = argparse.ArgumentParser(
-        description='Generate training dataset from paint-brushed dataset'
-    )
-
-    parser.add_argument('--dataset', required=False,
-                        default=ROOT_DIR + os.sep + 'dataset',
-                        metavar="/path/to/dataset",
-                        help='Directory where dataset is stored.')
-    args = parser.parse_args()
-    dataset_path = args.dataset
-    annotations_path = dataset_path + os.sep + 'Annotations'
-    images_path = dataset_path + os.sep + 'Images'
-
-    print("Dataset Path: ", dataset_path)
-    print("Annotations Path: ", annotations_path)
-    print("Images Path: ", images_path)
-
-    # Future color definition
-    crack_id = [0]  # Later for future categories
-    category_ids = {}  # Later for future categories
-
-    is_crowd = 0
-    annotation_id = 1
-    image_id = 1
-
-    annotations = []
-    images = []
-    categories = [
-        {"supercategory": "material defect",
-         "id": 1,
-         "name": "crack"}
-    ]
-
-    for subdir, dirs, files in os.walk(annotations_path):
-        for filename in files:
-            filepath = subdir + os.sep + filename
-            print("Loading file: %s" % filepath)
-            img = cv2.imread(filepath, cv2.IMREAD_COLOR)
-
-            image = make_image_annotation(img, filename, image_id)
-            images.append(image)
-
-            bitmap = get_color(img)
-            submasks = extractcolor.find_submasks(bitmap)
-            for color, submask in submasks.items():
-                # category_id = category_ids[image_id][color]
-                category_id = 1  # Default for now
-                annotation = extractcolor.make_submask_annotations(submask, image_id, category_id, annotation_id, is_crowd)
-                annotations.append(annotation)
-                annotation_id += 1
-
-            image_id += 1
-
-    coco = {
-        "images": images,
-        "annotations": annotations,
-        "categories": categories
-    }
-
-    print(json.dumps(coco))
-"""
