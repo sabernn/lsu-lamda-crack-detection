@@ -3,14 +3,13 @@ import numpy as np
 from PIL import Image
 from skimage import measure
 from shapely.geometry import Polygon, MultiPolygon
-import output_disp as od
 
 
 def get_colors(img):
     """
     Extracts regions of color and returns as a color mask
-    :param img: Image with regions of color (W,H,3)
-    :return: BGR mask of regions (W,H,3)
+    :param img: Image with regions of color dim(W,H,3)
+    :return: BGR mask of regions dim(W,H,3)
     """
     # Converts to HSV color format and attempts to detect greys from HSV
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -25,29 +24,20 @@ def get_colors(img):
 def get_mask_categorized(mask_raw):
     """
     Returns list of categorized submasks
-    :param mask_raw: Image with regions of color (W,H,3)
+    :param mask_raw: Image with regions of color dim(W,H,3)
     :return: Dictionary of binary submasks, keyed by RGB color
     """
     rgb_mask = cv2.cvtColor(mask_raw, cv2.COLOR_BGR2RGB)
     pil_mask = Image.fromarray(rgb_mask.astype('uint8'), 'RGB')
-    #ret, thresh = cv2.threshold(gray_mask, 50, 255, cv2.THRESH_BINARY)
-    #contours, hierarchy = cv2.findContours(thresh, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
 
-    #print('mask_raw shape:', mask_raw.shape)
-    #print('greymask shape:', gray_mask.shape)
-    #print('thresh shape:', thresh.shape)
-    #od.display(mask_raw, 'mask_raw')
-    #od.display(gray_mask, 'grey_mask')
-    #od.display(thresh, 'thresh')
-    #cv2.waitKey(0)
-    #cv2.destroyAllWindows()
-
-    # Code borrowed from:
+    # Code sourced from:
     # https://www.immersivelimit.com/create-coco-annotations-from-scratch
 
     pil_mask_categorized = {}
     width, height = pil_mask.size
     print("Looping through image now!")
+
+    # TODO: OPTIMIZE BY SWITCHING FROM PIL TO NUMPY
 
     for x in range(width):
         for y in range(height):
@@ -85,6 +75,9 @@ def make_submask_annotations(sub_mask, image_id, category_id, annotation_id, is_
     # is partially occluded. (E.g. an elephant behind a tree)
     contours = measure.find_contours(sub_mask, 0.5, positive_orientation='low')
 
+    # Code sourced from:
+    # https://www.immersivelimit.com/create-coco-annotations-from-scratch
+
     segmentations = []
     polygons = []
     for contour in contours:
@@ -95,6 +88,7 @@ def make_submask_annotations(sub_mask, image_id, category_id, annotation_id, is_
             contour[i] = (col - 1, row - 1)
 
         # Make a polygon and simplify it
+        # TODO: CHANGE THIS DEPENDING ON ACCURACY TO RESULTS
         poly = Polygon(contour)
         poly = poly.simplify(1.0, preserve_topology=False)
         polygons.append(poly)
@@ -108,6 +102,9 @@ def make_submask_annotations(sub_mask, image_id, category_id, annotation_id, is_
     height = max_y - y
     bbox = (x, y, width, height)
     area = multi_poly.area
+
+    # TODO: ADD PROPER ANNOTATIONS TO ALIGN WITH COCO STANDARDS
+    # TODO: ADD SEGMENTATION SECTION FOR MULTIPLE OBJECTS IN AN IMAGE
 
     annotation = {
         'segmentation': segmentations,
