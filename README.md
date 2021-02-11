@@ -16,8 +16,9 @@ Tested with Python 3.7+
 git clone https://github.com/btsai-dev/lsu-lamda-crack-detection.git
 ```
 
-- Install all necessary dependencies. It is highly recommended to install dependencies in an Anaconda or a Virtual Environment.
+- Install all necessary dependencies. It is highly recommended to install dependencies in a virtual environment
 ```console
+# For Python venv
 pip install -r requirements.txt
 ```
 
