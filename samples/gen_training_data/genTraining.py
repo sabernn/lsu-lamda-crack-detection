@@ -108,7 +108,7 @@ if __name__ == '__main__':
         "annotations": annotations,
         "categories": categories
     }
-    print(json.dumps(coco, indent=4))
+    # print(json.dumps(coco, indent=4))
 
     json_out = os.path.join(TEST_DIR, "output" + "." + "json")
 
