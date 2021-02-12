@@ -1,9 +1,5 @@
 numpy==1.19.5
-<<<<<<< HEAD
-scipy==1.6.0
-matplotlib==3.3.3
-opencv-contrib-python==4.5.1.48
-=======
+
 opencv-contrib-python==4.5.1.48
 scipy==1.6.0
 matplotlib==3.3.3
@@ -13,4 +9,3 @@ scikit-image==0.18.1
 Pillow==8.1.0
 setuptools==51.1.2
 ipython==7.19.0
->>>>>>> c776ca9797af290a9aaaf269c0b77c81a7630efc
