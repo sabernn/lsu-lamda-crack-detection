@@ -1,66 +1,33 @@
-<!-- PROJECT OVERVIEW -->
-<br />
-<p align="center">
-  <img src="doc/img/logo.jpg" alt="LSU" width="291" height="363">
 
-  <h1 align="center">AI-Assisted Crack Detection for LAMDA Project</h1>
-  <p align="center">
-    <a href="https://github.com/btsai-dev/lsu-lamda-crack-detection">View Demo</a>
-    ·
-    <a href="https://github.com/btsai-dev/lsu-lamda-crack-detection/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/btsai-dev/lsu-lamda-crack-detection/issues">Request Feature</a>
-  </p>
-</p>
+# LSU Lamda Crack Detection
 
-<!-- ABOUT THE PROJECT -->
-## About The Repository
-
-This repository contains code relevant to crack detection as part of the Louisiana Materials Design Alliance (LAMDA) project. The LAMDA project is led by [Dr. Shengmin Guo](https://www.lsu.edu/eng/mie/people/faculty/guo.php) ([LSU MIE](https://www.lsu.edu/eng/mie/)) and is funded by the National Science Foundation. The project is researching the development of new materials in additive manufacturing.
-
-### Related Links
-
-* [Press Release](https://www.lsu.edu/mediacenter/news/2020/05/21engineering_khonsari_lamda.php)
-* [NSF Award Page](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1946231)
-
-### Built With
-
-* [OpenCV](https://opencv.org/)
-
-<!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-* Python 3.4+
-* pip 20.1.0+
+#### Python
+Tested with Python 3.7+
 
-```sh
-pip install -U pip 		# Linux or MacOS
-python -m pip install -U pip	# Windows	
+### Installing
+
+- Clone the repository
+```console
+git clone https://github.com/btsai-dev/lsu-lamda-crack-detection.git
 ```
 
-### Installation
-
-1. Navigate to root directory
-2. Prepare development environment
-
-```sh
-pip3 install -r requirements.txt	# Linux of MacOS
-pip install -r requirements.txt		# Windows
+- Install all necessary dependencies. It is highly recommended to install dependencies in a virtual environment
+```console
+# For Python venv
+pip install -r requirements.txt
 ```
 
-<!-- USAGE EXAMPLES -->
-## Usage
+### Run the Colorseg demo
+- Navigate to ```samples\gen_training_data```  and execute the demo annotation program.
+```console
+python3 genTraining.py
+```
+- Program attempts to annotate the marked file in the ```resources\img\test``` folder.
 
-Example code can be found in the ```samples``` folder.
-
-<!-- LICENSE -->
-## License
-
-Distributed under the Apache 2.0 License. See `LICENSE` for more information.
-
-
+- The output annotated json file will be written to the same folder as ```output.json```.

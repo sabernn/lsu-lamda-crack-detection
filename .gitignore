@@ -1,3 +1,8 @@
+# IDE-based
+resources/img/*
+!resources/img/test
+!resources/img/.gitkeep 
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -129,3 +134,4 @@ dmypy.json
 .pyre/
 
 .idea/
+/resources/img/test/output.json
